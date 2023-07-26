@@ -9,8 +9,61 @@ using namespace std;
 GLuint renderingProgram;
 GLuint vao[numVAOs];
 
+void printShaderLog(GLuint shader) {
+    GLint len{0};
+    int chWrittn{0};
+    char* log;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
+    if (len > 0) {
+        log = (char*)malloc(len);
+        glGetShaderInfoLog(shader, len, &chWrittn, log);
+        cout << "Shader Info Log: " << log << endl;
+        free(log);
+    }
+}
+
+void printProgramLog(GLuint prog) {
+    GLint len{0};
+    int chWrittn{0};
+    char* log;
+    glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &len);
+    if (len > 0) {
+        log = (char*)malloc(len);
+        glGetProgramInfoLog(prog, len, &chWrittn, log);
+        cout << "Shader Info Log: " << log << endl;
+        free(log);
+    }
+}
+
+bool checkOpenGLError() {
+    bool foundError{false};
+    GLenum glErr = glGetError();
+    while (glErr != GL_NO_ERROR) {
+        cout << "glError: " << glErr << endl;
+        foundError = true;
+        glErr = glGetError();
+    }
+    return foundError;
+}
+
 GLuint createShaderProgram() {
-    const char* vshaderSource = "#version 410 \nvoid main(void) \n { gl_Position = vec4(0.0, 0.0, 0.0, 1.0); }";
+    GLint vertCompiled;
+    GLint fragCompiled;
+    GLint linked;
+
+    const char* vshaderSource = R"(
+        #version 410
+        void main(void) {
+            if(gl_VertexID == 0){
+                gl_Position = vec4(0.25, -0.25, 0.0, 1.0);
+            } else if(gl_VertexID == 1){
+                gl_Position = vec4(-0.25, -0.25, 0.0, 1.0);
+            } else if(gl_VertexID == 2){
+                gl_Position = vec4(0.25, 0.25, 0.0, 1.0);
+            }
+             
+        }
+    )";
     const char* fshaderSource =
         "#version 410 \n out vec4 color; \nvoid main(void) \n { if (gl_FragCoord.x<595) color = vec4(0.0, 1.0, 0.0, "
         "1.0); else color = vec4(0.0, 0.0, 1.0, 1.0); }";
@@ -19,12 +72,33 @@ GLuint createShaderProgram() {
     glShaderSource(vShader, 1, &vshaderSource, NULL);
     glShaderSource(fShader, 1, &fshaderSource, NULL);
     glCompileShader(vShader);
+
+    checkOpenGLError();
+    glGetShaderiv(vShader, GL_COMPILE_STATUS, &vertCompiled);
+    if (vertCompiled != 1) {
+        cout << "vertex compilation failed" << endl;
+        printShaderLog(vShader);
+    }
+
     glCompileShader(fShader);
+    checkOpenGLError();
+    glGetShaderiv(fShader, GL_COMPILE_STATUS, &fragCompiled);
+    if (fragCompiled != 1) {
+        cout << "fragment compilation failed" << endl;
+        printShaderLog(fShader);
+    }
 
     GLuint vfProgram = glCreateProgram();
     glAttachShader(vfProgram, vShader);
     glAttachShader(vfProgram, fShader);
     glLinkProgram(vfProgram);
+
+    checkOpenGLError();
+    glGetProgramiv(vfProgram, GL_LINK_STATUS, &linked);
+    if (linked != 1) {
+        cout << "linking failed" << endl;
+        printProgramLog(vfProgram);
+    }
 
     return vfProgram;
 }
@@ -40,7 +114,7 @@ void display(GLFWwindow* window, double currentTime) {
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(renderingProgram);
     glPointSize(30.0f);
-    glDrawArrays(GL_POINTS, 0, 1);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 int main(int argc, char* argv[]) {
