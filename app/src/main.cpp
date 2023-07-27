@@ -6,6 +6,9 @@ using namespace std;
 
 #define numVAOs 1
 
+float x = 0.0f;
+float inc = 0.01f;
+
 GLuint renderingProgram;
 GLuint vao[numVAOs];
 
@@ -53,13 +56,14 @@ GLuint createShaderProgram() {
 
     const char* vshaderSource = R"(
         #version 410
+        uniform float offset;
         void main(void) {
             if(gl_VertexID == 0){
-                gl_Position = vec4(0.25, -0.25, 0.0, 1.0);
+                gl_Position = vec4(0.25 + offset, -0.25, 0.0, 1.0);
             } else if(gl_VertexID == 1){
-                gl_Position = vec4(-0.25, -0.25, 0.0, 1.0);
+                gl_Position = vec4(-0.25 + offset, -0.25, 0.0, 1.0);
             } else if(gl_VertexID == 2){
-                gl_Position = vec4(0.25, 0.25, 0.0, 1.0);
+                gl_Position = vec4(0.25 + offset, 0.25, 0.0, 1.0);
             }
              
         }
@@ -111,8 +115,19 @@ void init(GLFWwindow* window) {
 
 void display(GLFWwindow* window, double currentTime) {
     glClearColor(1.0, 0.0, 0.0, 1.0);
+    glClear(GL_DEPTH_BUFFER_BIT);
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(renderingProgram);
+
+    x += inc;
+    if (x > 1.0f) {
+        inc = -0.01f;
+    } else if (x < -1.0f) {
+        inc = 0.01f;
+    }
+    GLuint offset_loc = glGetUniformLocation(renderingProgram, "offset");
+    glProgramUniform1f(renderingProgram, offset_loc, x);
+
     glPointSize(30.0f);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
