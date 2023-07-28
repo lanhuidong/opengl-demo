@@ -8,6 +8,8 @@ using namespace std;
 
 float x = 0.0f;
 float inc = 0.01f;
+float point_size = 10;
+float point_size_inc = 0.2;
 
 GLuint renderingProgram;
 GLuint vao[numVAOs];
@@ -59,7 +61,7 @@ GLuint createShaderProgram() {
         uniform float offset;
         void main(void) {
             if(gl_VertexID == 0){
-                gl_Position = vec4(0.25 + offset, -0.25, 0.0, 1.0);
+                gl_Position = vec4(0.75 + offset, -0.25, 0.0, 1.0);
             } else if(gl_VertexID == 1){
                 gl_Position = vec4(-0.25 + offset, -0.25, 0.0, 1.0);
             } else if(gl_VertexID == 2){
@@ -128,7 +130,14 @@ void display(GLFWwindow* window, double currentTime) {
     GLuint offset_loc = glGetUniformLocation(renderingProgram, "offset");
     glProgramUniform1f(renderingProgram, offset_loc, x);
 
-    glPointSize(30.0f);
+    point_size += point_size_inc;
+    if (point_size > 100) {
+        point_size_inc = -1;
+    } else if (point_size < 10) {
+        point_size_inc = 1;
+    }
+    glPointSize(point_size);
+    // glDrawArrays(GL_POINTS, 0, 1);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
