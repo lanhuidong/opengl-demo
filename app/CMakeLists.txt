@@ -30,6 +30,10 @@ add_executable(program_4_3 src/program_4_3.cpp src/util/render_util.cpp)
 target_link_libraries(program_4_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
 target_include_directories(program_4_3 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
+add_executable(program_4_4 src/program_4_4.cpp src/util/render_util.cpp)
+target_link_libraries(program_4_4 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_include_directories(program_4_4 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
+
 add_executable(main src/main.cpp)
 target_link_libraries(main ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
 target_include_directories(main PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
