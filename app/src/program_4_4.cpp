@@ -58,7 +58,7 @@ void init(GLFWwindow* window) {
                                         "/Users/lanhuidong/CppProjects/opengl-demo/app/src/shaders/fshader_4_4.glsl");
     camera_x = 0.0f;
     camera_y = 0.0f;
-    camera_z = 16.0f;
+    camera_z = 12.0f;
     cube_loc_x = 0.0f;
     cube_loc_y = -2.0f;
     cube_loc_z = 0.0f;

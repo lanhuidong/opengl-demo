@@ -2,13 +2,24 @@ cmake_minimum_required(VERSION 3.26)
 
 project(Demo
     VERSION 1.0.0
-    LANGUAGES CXX
+    LANGUAGES C CXX
 )
 
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    soil2
+    GIT_REPOSITORY https://github.com/SpartanJ/SOIL2.git
+    GIT_TAG        1.31 # 建议使用具体的版本 tag 或 commit hash
+)
+
+FetchContent_MakeAvailable(soil2)
 
 #conan配置
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})

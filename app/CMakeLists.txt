@@ -7,32 +7,36 @@ target_link_libraries(program_2_2 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIB
 target_include_directories(program_2_2 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_2_3 src/program_2_3.cpp src/util/render_util.cpp)
-target_link_libraries(program_2_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_2_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_2_3 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_2_5 src/program_2_5.cpp src/util/render_util.cpp)
-target_link_libraries(program_2_5 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_2_5 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_2_5 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_2_6 src/program_2_6.cpp src/util/render_util.cpp)
-target_link_libraries(program_2_6 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_2_6 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_2_6 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_4_1 src/program_4_1.cpp src/util/render_util.cpp)
-target_link_libraries(program_4_1 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_4_1 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_4_1 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_4_2 src/program_4_2.cpp src/util/render_util.cpp)
-target_link_libraries(program_4_2 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_4_2 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_4_2 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_4_3 src/program_4_3.cpp src/util/render_util.cpp)
-target_link_libraries(program_4_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_4_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_4_3 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(program_4_4 src/program_4_4.cpp src/util/render_util.cpp)
-target_link_libraries(program_4_4 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
+target_link_libraries(program_4_4 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_4_4 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
+
+add_executable(program_5_1 src/program_5_1.cpp src/util/render_util.cpp)
+target_link_libraries(program_5_1 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
+target_include_directories(program_5_1 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
 add_executable(main src/main.cpp)
 target_link_libraries(main ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})

@@ -1,5 +1,7 @@
 #include "render_util.h"
 
+#include <SOIL2.h>
+
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -90,4 +92,12 @@ GLuint RenderUtil::createShaderProgram(const std::string& vert_file, const std::
     }
 
     return shader_program;
+}
+
+GLuint RenderUtil::loadTexture(const char* tex_image_path) {
+    GLuint texture_id = SOIL_load_OGL_texture(tex_image_path, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+    if (texture_id == 0) {
+        std::cout << "cound not find texture file" << tex_image_path << std::endl;
+    }
+    return texture_id;
 }
