@@ -50,6 +50,10 @@ add_executable(program_6_3 src/program_6_3.cpp src/util/render_util.cpp src/impo
 target_link_libraries(program_6_3 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
 target_include_directories(program_6_3 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
 
+add_executable(program_7_1 src/program_7_1.cpp src/util/render_util.cpp src/torus.cpp)
+target_link_libraries(program_7_1 ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES} soil2)
+target_include_directories(program_7_1 PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
+
 add_executable(main src/main.cpp)
 target_link_libraries(main ${GLEW_LIBRARIES} ${glfw3_LIBRARIES} ${glm_LIBRARIES})
 target_include_directories(main PUBLIC include ${GLEW_INCLUDE_DIRS} ${glfw3_INCLUDE_DIRS} ${glm_INCLUDE_DIRS})
